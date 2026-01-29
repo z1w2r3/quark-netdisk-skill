@@ -103,16 +103,20 @@ quarkpan upload /local/file.txt -f /new/folder/ -c
 ### 4. 下载文件
 
 ```bash
-# 下载文件到本地
-quarkpan download /remote/file.txt /local/path/
+# 下载文件到当前目录
+quarkpan download file /网盘路径/文件名
+
+# 下载文件到指定目录
+quarkpan download file /网盘路径/文件名 -o /本地目录/
 
 # 下载整个文件夹
-quarkpan download /remote/folder/ /local/path/
+quarkpan download folder /网盘文件夹路径/ -o /本地目录/
 ```
 
 **特性：**
 - 支持断点续传
 - 大文件分片下载
+- 使用 `-o` 指定下载目录
 
 ### 5. 文件管理
 
@@ -165,7 +169,7 @@ quarkpan batch-save links.txt
 | 列出文件 | `quarkpan ls [路径]` |
 | 目录树 | `quarkpan list-dirs` |
 | 上传 | `quarkpan upload 本地路径 -f 网盘路径` |
-| 下载 | `quarkpan download 网盘路径 本地路径` |
+| 下载 | `quarkpan download file 网盘路径 -o 本地目录` |
 | 创建目录 | `quarkpan mkdir 路径` |
 | 删除 | `quarkpan rm 路径` |
 | 重命名 | `quarkpan rename 旧名 新名` |
