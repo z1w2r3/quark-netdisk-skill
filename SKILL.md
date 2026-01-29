@@ -1,3 +1,9 @@
+---
+name: quark-netdisk
+description: 夸克网盘文件操作 - 上传、下载、分享、管理文件。通过 quarkpan CLI 实现。
+metadata: {"moltbot":{"requires":{"bins":["python3","pip"]}}}
+---
+
 # Quark Netdisk Skill
 
 > AI 智能体技能：通过 quarkpan CLI 操作夸克网盘，实现文件上传、下载、分享和管理。
@@ -31,6 +37,25 @@ quarkpan version
 ## 工作流程
 
 ### 1. 首次使用 - 登录认证
+
+**方式一：AI 助手展示二维码（推荐）**
+
+AI 助手使用 `scripts/qr_login.py` 脚本生成二维码图片并展示给用户：
+
+```bash
+# 1. 生成二维码图片
+python3 scripts/qr_login.py generate
+# 输出: {"status": "ok", "qr_image": "/tmp/quark_qr/login_qr.png", ...}
+
+# 2. AI 助手使用 Read 工具展示二维码图片
+# Read /tmp/quark_qr/login_qr.png
+
+# 3. 用户扫码后检查登录状态
+python3 scripts/qr_login.py check
+# 输出: {"status": "success", "message": "登录成功！", ...}
+```
+
+**方式二：用户终端登录**
 
 ```bash
 # 显示二维码，用夸克 APP 扫描登录
