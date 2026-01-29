@@ -10,23 +10,25 @@ metadata: {"moltbot":{"requires":{"bins":["python3","pip"]}}}
 
 ## 概述
 
-本技能使 AI 编程助手（Claude Code、Cursor、Clawdbot 等）能够操作夸克网盘进行文件管理。基于 [quarkpan](https://pypi.org/project/quarkpan/) CLI 工具实现。
+本技能使 AI 编程助手（Claude Code、Cursor、Clawdbot 等）能够操作夸克网盘进行文件管理。基于 [quarkpan](https://github.com/z1w2r3/QuarkPan) CLI 工具的修复版本实现。
 
 ## 核心功能
 
 - **二维码扫码登录**：安全便捷的认证方式
-- **文件上传**：支持单文件和文件夹上传，自动分片
+- **文件上传**：支持单文件和文件夹上传，自动分片，支持秒传
 - **文件下载**：支持断点续传的文件下载
 - **文件管理**：创建目录、删除、重命名、移动、搜索
 - **分享功能**：创建分享链接、转存他人分享
 
 ## 前置条件
 
-确保已安装 quarkpan：
+安装修复版 quarkpan（包含秒传修复）：
 
 ```bash
-pip install quarkpan
+pip install git+https://github.com/z1w2r3/QuarkPan.git
 ```
+
+> **注意**：原版 quarkpan 存在上传 bug，建议使用上述修复版本。
 
 验证安装：
 
@@ -83,16 +85,20 @@ quarkpan list-dirs
 ### 3. 上传文件
 
 ```bash
-# 上传单个文件到指定目录
-quarkpan upload /local/file.txt /remote/path/
+# 上传文件到根目录
+quarkpan upload /local/file.txt
 
-# 上传整个文件夹
-quarkpan upload /local/folder/ /remote/path/
+# 上传文件到指定目录
+quarkpan upload /local/file.txt -f /remote/path/
+
+# 上传并自动创建不存在的目录
+quarkpan upload /local/file.txt -f /new/folder/ -c
 ```
 
 **注意事项：**
 - 大文件会自动分片上传
-- 网盘路径以 `/` 开头
+- 支持秒传（相同文件秒速完成）
+- 使用 `-f` 指定目标路径，`-c` 自动创建目录
 
 ### 4. 下载文件
 
@@ -158,7 +164,7 @@ quarkpan batch-save links.txt
 | 检查状态 | `quarkpan status` |
 | 列出文件 | `quarkpan ls [路径]` |
 | 目录树 | `quarkpan list-dirs` |
-| 上传 | `quarkpan upload 本地路径 网盘路径` |
+| 上传 | `quarkpan upload 本地路径 -f 网盘路径` |
 | 下载 | `quarkpan download 网盘路径 本地路径` |
 | 创建目录 | `quarkpan mkdir 路径` |
 | 删除 | `quarkpan rm 路径` |
