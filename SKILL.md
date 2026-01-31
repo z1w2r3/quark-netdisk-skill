@@ -105,21 +105,20 @@ quarkpan list-dirs
 
 ### 上传文件
 
-> ⚠️ **重要：本地文件路径必须使用绝对路径！** 使用相对路径会导致异常行为（如触发扫码）。
-
 ```bash
-# 上传文件到根目录（注意使用绝对路径）
+# 上传文件到根目录（支持绝对路径和相对路径）
+quarkpan upload ./file.txt
 quarkpan upload /Users/xxx/file.txt
 
 # 上传文件到指定目录
-quarkpan upload /Users/xxx/file.txt -f /remote/path/
+quarkpan upload ./file.txt -f /remote/path/
 
 # 上传并自动创建不存在的目录
-quarkpan upload /Users/xxx/file.txt -f /new/folder/ -c
+quarkpan upload ./file.txt -f /new/folder/ -c
 ```
 
 **注意事项：**
-- **本地路径必须是绝对路径**（如 `/Users/xxx/file.txt`），不要用相对路径（如 `./file.txt`）
+- 支持绝对路径和相对路径
 - 大文件会自动分片上传
 - 支持秒传（相同文件秒速完成）
 - 使用 `-f` 指定目标路径，`-c` 自动创建目录
