@@ -124,14 +124,14 @@ def complete_login(client: httpx.Client, service_ticket: str):
 
 def save_cookie(cookie_string: str):
     """保存 Cookie 到配置文件（兼容 quarkpan 格式）"""
-    # quarkpan 默认使用当前目录的 config 文件夹
+    # quarkpan 默认使用用户主目录的 .quarkpan 文件夹
     # 也可以通过环境变量 QUARK_CONFIG_DIR 指定
     import os
     config_dir = os.getenv('QUARK_CONFIG_DIR')
     if config_dir:
         config_dir = Path(config_dir)
     else:
-        config_dir = Path.cwd() / "config"
+        config_dir = Path.home() / ".quarkpan"
 
     config_dir.mkdir(parents=True, exist_ok=True)
 
